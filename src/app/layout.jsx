@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin, FaYoutube} from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin, FaYoutube, FaLifeRing, FaHeart, FaRegCopyright} from "react-icons/fa";
+import { IoLayers } from "react-icons/io5";
 
 import "./globals.css";
 
@@ -26,7 +27,7 @@ export default function RootLayout({ children }) {
       >
         {children}
         <section className="w-full h-80 bg-white flex justify-center items-center">
-          <div className="w-2/4 h-3/5 flex justify-center items-center rounded shadow-md">
+          <div className="w-2/5 h-3/5 flex justify-center items-center rounded shadow-md">
             <div className="w-2/5 h-5/6 pl-2">
               <img className="w-full h-full rounded" src="/bookTable.jpg" alt="" />
             </div>
@@ -48,21 +49,35 @@ export default function RootLayout({ children }) {
           </div>
         </section>
         <footer className="w-full h-60 bg-gray-700 flex items-end justify-center">
-          <div className="w-4/5 h-4/5">
-            <div className="w-full">
-              <div>
-
+          <div className="w-4/5 h-4/5 flex flex-col justify-between items-center">
+            <div className="w-full h-2/4 border-b border-gray-300 flex">
+              <div className="w-2/4 h-full flex">
+                <div className="h-3/4 flex items-center">
+                  <IoLayers className="w-3/4 h-3/4 text-green-700"/>
+                </div>
+                <div className="text-white flex flex-col gap-0.5 pt-2">
+                  <h3>Book Information ?</h3>
+                  <p>Please send us an email at support@gmail.com</p>
+                </div>
               </div>
-              <div>
-
+              <div className="w-2/4 h-full flex">
+                <div className="h-3/4 flex items-center">
+                  <FaLifeRing className="w-3/4 h-3/4 text-green-700"/>
+                </div>
+                <div className="text-white flex flex-col gap-0.5 pt-2">
+                  <h3>Book Information ?</h3>
+                  <p>Please send us an email at support@gmail.com</p>
+                </div>
               </div>
             </div>
-            <div>
-              <div>
-
+            <div className="w-full h-2/4 flex items-center justify-between">
+              <div className="w-2/4 h-3/4 flex items-center">
+                <h1 className="text-white text-2xl">BookShelf</h1>
               </div>
-              <div>
-                
+              <div className="w-2/4 h-3/4 flex items-center justify-end">
+                <p className="text-white inline-flex items-center space-x-1">
+                  <FaRegCopyright /> <span>2025 all right reserved made with love by</span> <FaHeart /> <span>Alexandre</span>
+                </p>
               </div>
             </div>
           </div>
