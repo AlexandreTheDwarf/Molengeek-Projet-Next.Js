@@ -72,7 +72,7 @@ const AllBooksPage = () => {
             type="range"
             min="0"
             max="5"
-            step="0.1"
+            step="1"
             value={minRating}
             onChange={(e) => setMinRating(Number(e.target.value))}
             className="w-full cursor-pointer"

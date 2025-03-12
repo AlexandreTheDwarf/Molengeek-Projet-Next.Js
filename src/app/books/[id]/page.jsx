@@ -21,7 +21,7 @@ const BookDetailPage = async ({ params }) => {
       <div className='w-6/12 h-128 bg-white pt-5 rounded-xl flex flex-col items-center gap-2'>
         <h1 className='text-center text-2xl font-bold '>{book.title}</h1>
         <p className='text-center'>By : <span className='italic'>{book.authors}</span></p>
-        <p className='w-8/12 text-sm line-clamp-3 overflow-hidden text-ellipsis'>{book.description}</p>
+        <p className="w-8/12 h-15 text-sm overflow-auto">{book.description}</p>
         <div className='flex flex-col gap-2 w-8/12 bg-gray-200 rounded p-2'>
           <div className='p-3 flex justify-between items-center border'>
             <span>Edition :</span>
