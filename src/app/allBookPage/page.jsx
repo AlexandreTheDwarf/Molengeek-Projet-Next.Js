@@ -49,13 +49,13 @@ const AllBooksPage = () => {
         />
 
         {/* Catégories */}
-        <div>
+        <div className="flex flex-col items-center">
           <h2 className="font-bold italic mb-2">Category</h2>
-          <ul className="flex flex-col gap-2">
+          <ul className="flex flex-col gap-2 items-center">
             {categories.map((category) => (
               <li
                 key={category}
-                className={`cursor-pointer ${selectedCategory === category ? "font-bold text-blue-500" : ""}`}
+                className={`cursor-pointer ${selectedCategory === category ? "font-bold text-green-700 underline" : ""}`}
                 onClick={() => setSelectedCategory(category)}
               >
                 {category}
@@ -65,8 +65,8 @@ const AllBooksPage = () => {
         </div>
 
         {/* Rating minimum */}
-        <div>
-          <h2 className="font-bold italic mb-2">Minimum rating</h2>
+        <div className="flex flex-col items-center gap-6">
+          <h2 className="font-bold italic mb-2 text-center">Minimum rating</h2>
           <p>{minRating} / 5</p>
           <input
             type="range"
@@ -98,18 +98,24 @@ const AllBooksPage = () => {
         </div>
 
         {/* Liste des livres */}
-        <ul className="grid grid-cols-3 gap-6 h-156 overflow-y-scroll">
+        <div className="grid grid-cols-3 gap-20 h-186 overflow-y-scroll px-10">
           {filteredBooks.map((book) => (
-            <li key={book.id} className="border p-4 rounded-md shadow-md bg-white">
-              <Link href={`/books/${book.id}`}>
-                <img src={book.image_url} alt={book.title} className="w-full h-40 object-cover rounded-md mb-2" />
+            <div
+              key={book.id}
+              className="h-96 p-4 rounded-md shadow-md bg-white flex flex-col items-center relative group overflow-hidden"
+            >
+              <Link className="flex flex-col items-center justify-center" href={`/books/${book.id}`}>
+                <img src={book.image_url} alt={book.title} className="h-60 rounded-md mb-2" />
                 <h2 className="font-bold text-lg">{book.title}</h2>
               </Link>
               <p className="text-gray-600 italic">By {book.authors}</p>
-              <p className="mt-1">⭐ {book.rating} / 5</p>
-            </li>
+              <div className="w-full flex justify-evenly items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-full group-hover:translate-y-0 absolute bottom-0 left-0 right-0 bg-white p-2 rounded-t-md shadow-md">
+                <p className="mt-1">⭐ {book.rating} / 5</p>
+                <p className="mt-1">on {book.rating_count} advices</p>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );
