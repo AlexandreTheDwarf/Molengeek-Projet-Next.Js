@@ -1,9 +1,9 @@
 import { Geist, Geist_Mono } from "next/font/google";
-import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin, FaYoutube, FaLifeRing, FaHeart, FaRegCopyright, FaPhoneAlt} from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedin, FaYoutube, FaLifeRing, FaHeart, FaRegCopyright} from "react-icons/fa";
 import { IoLayers } from "react-icons/io5";
-import { CgMenuLeft } from "react-icons/cg";
 
 import "./globals.css";
+import NavBar from "../components/NavBar/NavBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,15 +26,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <header className="w-3/4 h-30 bg-white flex justify-between items-center">
-          <div className="w-1/4 h-full flex items-center justify-start gap-2">
-            <CgMenuLeft className="text-3xl"/>  
-            <h1 className="text-3xl">BOOKSHELF.</h1>
-          </div>
-          <div className="w-1/4 h-full flex items-center justify-end gap-2">
-            <p className="inline-flex items-center space-x-1"><FaPhoneAlt /> <span>0489632596 </span><FaHeart /></p>
-          </div>
-        </header>
+        <NavBar/>
         {children}
         <section className="w-full h-80 bg-white flex justify-center items-center">
           <div className="w-2/5 h-3/5 flex justify-center items-center rounded shadow-md">
