@@ -39,8 +39,10 @@ export default function Home() {
     <div className="flex flex-col gap-20">
       <Carousel />
 
-      <h4 className="mt-8 py-5 text-center text-gray-800 bg-gray-200 text-lg font-semibold">BOOKS GALLERY</h4>
-      <h1 className="text-center text-gray-800 bg-gray-200 text-3xl font-bold">Popular Books (Rating 4+)</h1>
+      <div className="flex flex-col justify-center gap-2">
+        <h4 className="text-center">Books Gallery</h4>
+        <h1 className="text-center text-gray-800 text-3xl font-bold">Popular Books</h1>
+      </div>
 
       {/* Gestion du chargement et des erreurs */}
       {loading && <p className="text-center text-gray-600">Loading books...</p>}
@@ -63,7 +65,6 @@ export default function Home() {
                   <p className="text-sm">
                     By : <i>{book.authors}</i>
                   </p>
-                  <p className="text-yellow-500 font-bold">⭐ {book.rating}</p>
                 </Link>
               </div>
             ))}
