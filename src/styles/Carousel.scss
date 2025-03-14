@@ -5,14 +5,14 @@
     overflow: hidden;
     position: relative;
     background-color: #f0f0f0;
-    height: 65vh;
+    height: 60vh;
 
     .carousel-slide {
         display: flex;
         align-items: center;
         justify-content: space-between;
         background-color: #f0f0f0;
-        padding: 50px;
+        padding-top: 50px;
         border-radius: 10px;
         min-height: 300px;
         transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
