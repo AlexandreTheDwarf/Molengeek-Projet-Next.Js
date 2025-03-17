@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { FaList } from "react-icons/fa";
+import { FaList, FaHeart, FaRegHeart } from "react-icons/fa";
 import { FiPlusSquare } from "react-icons/fi";
+import { useFavorites } from "../../context/FavoritesContext"; 
 
 const fetchBooks = async () => {
   const res = await fetch("https://example-data.draftbit.com/books");
@@ -16,7 +17,9 @@ const AllBooksPage = () => {
   const [minRating, setMinRating] = useState(0);
   const [sortOrder, setSortOrder] = useState("rating-up");
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [display, setDisplay] = useState("grid")
+  const [display, setDisplay] = useState("grid");
+
+  const { favorites, toggleFavorite } = useFavorites(); // Utiliser le contexte des favoris
 
   useEffect(() => {
     const getBooks = async () => {
@@ -100,22 +103,32 @@ const AllBooksPage = () => {
 
         {/* Liste des livres : display grid */}
         <div className="grid grid-cols-3 gap-20 h-186 overflow-y-scroll px-10">
-          {filteredBooks.map((book) => (
-            <div
-              key={book.id}
-              className="h-96 p-4 rounded-md shadow-md bg-white flex flex-col items-center relative group overflow-hidden"
-            >
-              <Link className="flex flex-col items-center justify-center" href={`/books/${book.id}`}>
-                <img src={book.image_url} alt={book.title} className="h-60 rounded-md mb-2" />
-                <h2 className="font-bold text-lg">{book.title}</h2>
-              </Link>
-              <p className="text-gray-600 italic">By {book.authors}</p>
-              <div className="w-full flex justify-evenly items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-full group-hover:translate-y-0 absolute bottom-0 left-0 right-0 bg-white p-2 rounded-t-md shadow-md">
-                <p className="mt-1">⭐ {book.rating} / 5</p>
-                <p className="mt-1">on {book.rating_count} advices</p>
+          {filteredBooks.map((book) => {
+            const isFavorite = favorites.some((fav) => fav.id === book.id);
+
+            return (
+              <div
+                key={book.id}
+                className="h-96 p-4 rounded-md shadow-md bg-white flex flex-col items-center relative group overflow-hidden"
+              >
+                <button
+                  onClick={() => toggleFavorite(book)}
+                  className="absolute top-2 left-2 text-red-500"
+                >
+                  {isFavorite ? <FaHeart /> : <FaRegHeart />}
+                </button>
+                <Link className="flex flex-col items-center justify-center" href={`/books/${book.id}`}>
+                  <img src={book.image_url} alt={book.title} className="h-60 rounded-md mb-2" />
+                  <h2 className="font-bold text-lg">{book.title}</h2>
+                </Link>
+                <p className="text-gray-600 italic">By {book.authors}</p>
+                <div className="w-full flex justify-evenly items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-full group-hover:translate-y-0 absolute bottom-0 left-0 right-0 bg-white p-2 rounded-t-md shadow-md">
+                  <p className="mt-1">⭐ {book.rating} / 5</p>
+                  <p className="mt-1">on {book.rating_count} advices</p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
