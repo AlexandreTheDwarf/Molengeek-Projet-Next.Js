@@ -16,6 +16,7 @@ const AllBooksPage = () => {
   const [minRating, setMinRating] = useState(0);
   const [sortOrder, setSortOrder] = useState("rating-up");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [display, setDisplay] = useState("grid")
 
   useEffect(() => {
     const getBooks = async () => {
@@ -84,8 +85,8 @@ const AllBooksPage = () => {
       <div className="w-3/4">
         <div className="flex justify-between items-center mb-5">
           <div className="flex gap-3 text-xl">
-            <FiPlusSquare className="cursor-pointer" />
-            <FaList className="cursor-pointer" />
+            <FiPlusSquare className="cursor-pointer" onClick={() => setDisplay("grid")}/>
+            <FaList className="cursor-pointer" onClick={() => setDisplay("list")}/>
           </div>
           <select
             value={sortOrder}
@@ -97,7 +98,7 @@ const AllBooksPage = () => {
           </select>
         </div>
 
-        {/* Liste des livres */}
+        {/* Liste des livres : display grid */}
         <div className="grid grid-cols-3 gap-20 h-186 overflow-y-scroll px-10">
           {filteredBooks.map((book) => (
             <div

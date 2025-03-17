@@ -27,9 +27,20 @@ export default function Navbar() {
         setIsFavoritesOpen(false);
       }
     };
+  
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isMenuOpen, isFavoritesOpen]);
+  
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []); // Dépendances vides pour éviter les re-renders inutiles
+  
+  // Ferme le menu lors d'un changement de route
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setIsFavoritesOpen(false);
+  }, [pathname]);
+  
 
   return (
     <>
@@ -53,6 +64,7 @@ export default function Navbar() {
         </div>
       </nav>
 
+      {/* Menu latéral */}
       <div className={`fixed top-0 left-0 w-[300px] h-screen bg-white shadow-lg transform transition-transform duration-300 flex flex-col z-10 ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <div className="flex justify-between items-center font-bold text-xl pb-2.5 bg-gray-300 p-5">
           <h2>BOOKSHELF</h2>
@@ -61,12 +73,12 @@ export default function Navbar() {
 
         <ul className="list-none pl-5 mt-5">
           <li className="py-2.5 text-xl">
-            <Link href="/" onClick={() => setIsMenuOpen(false)} className="text-black no-underline transition-colors hover:text-[#328f7b]">
+            <Link href="/" className="text-black no-underline transition-colors hover:text-[#328f7b]">
               Main page
             </Link>
           </li>
           <li className="py-2.5 text-xl">
-            <Link href="/allBookPage" onClick={() => setIsMenuOpen(false)} className="text-black no-underline transition-colors hover:text-[#328f7b]">
+            <Link href="/allBookPage" className="text-black no-underline transition-colors hover:text-[#328f7b]">
               All books
             </Link>
           </li>
@@ -81,13 +93,14 @@ export default function Navbar() {
               </button>
             </>
           ) : (
-            <Link href="/login" className="block text-[#328f7b] text-xl font-bold p-2.5" onClick={() => setIsMenuOpen(false)}>
+            <Link href="/login" className="block text-[#328f7b] text-xl font-bold p-2.5">
               Connexion
             </Link>
           )}
         </div>
       </div>
 
+      {/* Favoris */}
       <div className={`fixed top-0 right-0 w-[350px] h-screen bg-white shadow-lg p-5 transform transition-transform duration-300 flex flex-col text-center z-10 ${isFavoritesOpen ? "translate-x-0" : "translate-x-full"}`}>
         <FaTimes className="absolute right-3.5 top-3.5 text-lg cursor-pointer" onClick={() => setIsFavoritesOpen(false)} />
         <h2>Favorites</h2>
