@@ -27,20 +27,19 @@ export default function Navbar() {
         setIsFavoritesOpen(false);
       }
     };
-  
+
     document.addEventListener("mousedown", handleClickOutside);
-  
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []); // Dépendances vides pour éviter les re-renders inutiles
-  
+  }, []);
+
   // Ferme le menu lors d'un changement de route
   useEffect(() => {
     setIsMenuOpen(false);
     setIsFavoritesOpen(false);
   }, [pathname]);
-  
 
   return (
     <>
@@ -60,7 +59,9 @@ export default function Navbar() {
         <div className="flex items-center ml-[10%] mr-[5%] gap-5">
           <FaPhoneAlt />
           <span>0485313406</span>
-          <FaHeart className="cursor-pointer hover:text-[#328f7b]" onClick={() => setIsFavoritesOpen(true)} />
+          {user && (
+            <FaHeart className="cursor-pointer hover:text-[#328f7b]" onClick={() => setIsFavoritesOpen(true)} />
+          )}
         </div>
       </nav>
 
@@ -100,31 +101,36 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Favoris */}
-      <div className={`fixed top-0 right-0 w-[350px] h-screen bg-white shadow-lg p-5 transform transition-transform duration-300 flex flex-col text-center z-10 ${isFavoritesOpen ? "translate-x-0" : "translate-x-full"}`}>
-        <FaTimes className="absolute right-3.5 top-3.5 text-lg cursor-pointer" onClick={() => setIsFavoritesOpen(false)} />
-        <h2>Favorites</h2>
-        {favorites.length === 0 ? (
-          <p>No favorites yet</p>
-        ) : (
-          <ul>
-            {favorites.map((book) => (
-              <li key={book.id} className="flex items-center p-6 relative transition-colors duration-300 w-full hover:bg-gray-100 rounded">
-                <img src={book.image_url} alt={book.title} className="w-24 h-24 object-cover mr-2.5" />
-                <div className="flex justify-between items-center w-full">
-                  <p>{book.title}</p>
-                  <div className="flex gap-5 opacity-0 transition-opacity duration-300 mr-2.5">
-                    <FaHeartBroken className="w-5 h-5 p-1.5 text-black bg-gray-400 rounded-full cursor-pointer transition-transform duration-300 hover:bg-[#328f7b] hover:text-white hover:scale-110" onClick={() => toggleFavorite(book)} />
-                    <Link href={`/book/${book.id}`}>
-                      <FaBook className="w-5 h-5 p-1.5 text-black bg-gray-400 rounded-full cursor-pointer transition-transform duration-300 hover:bg-[#328f7b] hover:text-white hover:scale-110" />
-                    </Link>
+      {/* Favoris (Seulement si utilisateur connecté) */}
+      {user && (
+        <div className={`fixed top-0 right-0 w-[350px] h-screen bg-white shadow-lg p-5 transform transition-transform duration-300 flex flex-col text-center z-10 ${isFavoritesOpen ? "translate-x-0" : "translate-x-full"}`}>
+          <FaTimes className="absolute right-3.5 top-3.5 text-lg cursor-pointer" onClick={() => setIsFavoritesOpen(false)} />
+          <h2>Favorites</h2>
+          {favorites.length === 0 ? (
+            <p>No favorites yet</p>
+          ) : (
+            <ul>
+              {favorites.map((book) => (
+                <li key={book.id} className="flex items-center p-6 relative transition-colors duration-300 w-full hover:bg-gray-100 rounded">
+                  <img src={book.image_url} alt={book.title} className="w-24 h-24 object-cover mr-2.5" />
+                  <div className="flex justify-between items-center w-full">
+                    <p className="text-left">{book.title}</p>
+                    <div className="flex gap-3">
+                      <Link href={`/books/${book.id}`}>
+                        <FaBook className="w-5 h-5 p-1.5 text-black bg-gray-400 rounded-full cursor-pointer transition-transform duration-300 hover:bg-[#328f7b] hover:text-white hover:scale-110" />
+                      </Link>
+                      <FaTimes 
+                        className="w-5 h-5 p-1.5 text-white bg-red-500 rounded-full cursor-pointer transition-transform duration-300 hover:bg-red-700 hover:scale-110"
+                        onClick={() => user && toggleFavorite(book)} 
+                      />
+                    </div>
                   </div>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
     </>
   );
 }

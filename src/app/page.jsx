@@ -1,10 +1,11 @@
-"use client"
+"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Carousel from "../components/Carousel/Carousel";
-import { useFavorites } from "../context/FavoritesContext"; 
-import { FaHeart, FaRegHeart } from 'react-icons/fa'; // Importer les icônes de cœur
+import { useFavorites } from "../context/FavoritesContext";
+import { useAuth } from "../context/AuthContext"; // Importer le contexte d'authentification
+import { FaHeart, FaRegHeart } from "react-icons/fa"; // Icônes de cœur
 
 export default function Home() {
   const [books, setBooks] = useState([]);
@@ -12,7 +13,8 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const { favorites, toggleFavorite } = useFavorites(); // Utiliser le contexte des favoris
+  const { user } = useAuth(); // Vérifier si l'utilisateur est connecté
+  const { favorites, toggleFavorite } = useFavorites(); // Gérer les favoris
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -21,8 +23,7 @@ export default function Home() {
         if (!res.ok) throw new Error("Failed to fetch books");
         const data = await res.json();
 
-        const filteredBooks = data.filter(book => book.rating >= 4);
-
+        const filteredBooks = data.filter((book) => book.rating >= 4);
         setBooks(filteredBooks);
       } catch (err) {
         setError(err.message);
@@ -71,12 +72,16 @@ export default function Home() {
                       By : <i>{book.authors}</i>
                     </p>
                   </Link>
-                  <button
-                    onClick={() => toggleFavorite(book)}
-                    className="mt-2 text-red-500"
-                  >
-                    {isFavorite ? <FaHeart /> : <FaRegHeart />}
-                  </button>
+
+                  {/* Afficher le bouton favori uniquement si l'utilisateur est connecté */}
+                  {user && (
+                    <button
+                      onClick={() => toggleFavorite(book)}
+                      className="mt-2 text-red-500"
+                    >
+                      {isFavorite ? <FaHeart /> : <FaRegHeart />}
+                    </button>
+                  )}
                 </div>
               );
             })}
