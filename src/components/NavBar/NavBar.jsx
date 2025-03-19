@@ -43,7 +43,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="flex items-center justify-center p-4 bg-white text-lg h-[10vh] w-full gap-[15%]">
+      <nav className="flex items-center justify-center p-4 bg-white text-lg h-[10vh] w-full gap-[15%] md:gap-1 lg:gap-1">
         <div className="flex items-center justify-center w-[30%] gap-[3%]">
           <CgMenuLeft className="w-10 h-10 cursor-pointer" onClick={() => setIsMenuOpen(true)} />
           <Link href="/" className="text-black no-underline">

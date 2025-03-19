@@ -6,7 +6,7 @@ import { FaList, FaHeart, FaRegHeart } from "react-icons/fa";
 import { FiPlusSquare } from "react-icons/fi";
 import { FaArrowTurnUp } from "react-icons/fa6";
 import { useFavorites } from "../../context/FavoritesContext";
-import { useAuth } from "../../context/AuthContext"; 
+import { useAuth } from "../../context/AuthContext";
 
 const fetchBooks = async () => {
   const res = await fetch("https://example-data.draftbit.com/books");
@@ -14,7 +14,7 @@ const fetchBooks = async () => {
 };
 
 const AllBooksPage = () => {
-  const { user } = useAuth(); // Vérifier si l'utilisateur est connecté
+  const { user } = useAuth();
   const { favorites, toggleFavorite } = useFavorites();
   const [books, setBooks] = useState([]);
   const [search, setSearch] = useState("");
@@ -40,9 +40,9 @@ const AllBooksPage = () => {
     .sort((a, b) => (sortOrder === "rating-up" ? a.rating - b.rating : b.rating - a.rating));
 
   return (
-    <section className="w-full px-10 flex gap-10">
+    <section className="w-full px-4 md:px-10 flex flex-col md:flex-row gap-6 md:gap-10">
       {/* Sidebar gauche */}
-      <div className="w-1/4 flex flex-col gap-6">
+      <div className="w-full md:w-1/4 flex flex-col gap-6">
         <input
           type="text"
           placeholder="Search by name"
@@ -82,7 +82,7 @@ const AllBooksPage = () => {
       </div>
 
       {/* Contenu principal */}
-      <div className="w-3/4">
+      <div className="w-full md:w-3/4">
         <div className="flex justify-between items-center mb-5">
           <div className="flex gap-3 text-xl">
             <FiPlusSquare className="cursor-pointer" onClick={() => setDisplay("grid")} />
@@ -99,16 +99,15 @@ const AllBooksPage = () => {
         </div>
 
         {/* Liste des livres : display grid */}
-        <div className="grid grid-cols-3 gap-20 h-186 overflow-y-scroll px-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 h-auto overflow-y-scroll px-4 md:px-10">
           {filteredBooks.map((book) => {
             const isFavorite = favorites.some((fav) => fav.id === book.id);
 
             return (
               <div
                 key={book.id}
-                className="h-96 p-4 rounded-md shadow-md bg-white flex flex-col items-center relative group overflow-hidden"
+                className="h-auto p-4 rounded-md shadow-md bg-white flex flex-col items-center relative group overflow-hidden"
               >
-                {/* Afficher le bouton favori uniquement si l'utilisateur est connecté */}
                 {user && (
                   <button
                     onClick={() => toggleFavorite(book)}

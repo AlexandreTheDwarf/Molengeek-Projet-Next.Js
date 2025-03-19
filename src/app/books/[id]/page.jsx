@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useFavorites } from "../../../context/FavoritesContext";
-import { useAuth } from "../../../context/AuthContext"; // Importer le contexte d'authentification
+import { useAuth } from "../../../context/AuthContext";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 const fetchBookById = async (id) => {
@@ -12,7 +12,7 @@ const fetchBookById = async (id) => {
 };
 
 const BookDetailPage = ({ params }) => {
-  const { user } = useAuth(); // Vérifier si l'utilisateur est connecté
+  const { user } = useAuth();
   const { favorites, toggleFavorite } = useFavorites();
   const [book, setBook] = useState(null);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -32,14 +32,13 @@ const BookDetailPage = ({ params }) => {
   }
 
   return (
-    <section className="w-full h-4/5 flex justify-center items-center bg-gray-200 py-20">
-      <div className="w-3/12 h-128 relative">
-        <img src={book.image_url} alt={book.title} className="rounded-xl h-full" />
-        
-        {/* Afficher le bouton favori uniquement si l'utilisateur est connecté */}
+    <section className="w-full flex flex-col md:flex-row justify-center items-center bg-gray-200 py-10 px-4">
+      <div className="w-full md:w-5/12 lg:w-3/12 h-auto relative mb-4 md:mb-0">
+        <img src={book.image_url} alt={book.title} className="rounded-xl w-full h-auto" />
+
         {user && (
           <button
-            className="absolute top-3 right-3 text-3xl text-red-500 hover:text-red-700"
+            className="absolute top-3 right-3 text-2xl md:text-3xl text-red-500 hover:text-red-700"
             onClick={() => toggleFavorite(book)}
           >
             {isFavorite ? <FaHeart /> : <FaRegHeart />}
@@ -47,14 +46,14 @@ const BookDetailPage = ({ params }) => {
         )}
       </div>
 
-      <div className="w-6/12 h-128 bg-white pt-5 rounded-xl flex flex-col items-center gap-2">
-        <h1 className="text-center text-2xl font-bold">{book.title}</h1>
+      <div className="w-full md:w-7/12 lg:w-6/12 bg-white pt-5 rounded-xl flex flex-col items-center gap-2 px-4 pb-2">
+        <h1 className="text-center text-xl md:text-2xl font-bold">{book.title}</h1>
         <p className="text-center">
           By : <span className="italic">{book.authors}</span>
         </p>
-        <p className="w-8/12 h-15 text-sm overflow-auto">{book.description}</p>
+        <p className="w-full md:w-10/12 h-auto text-sm overflow-auto">{book.description}</p>
 
-        <div className="flex flex-col gap-2 w-8/12 bg-gray-200 rounded p-2">
+        <div className="flex flex-col gap-2 w-full md:w-10/12 bg-gray-200 rounded p-2">
           <div className="p-3 flex justify-between items-center border">
             <span>Edition :</span>
             <span>{book.edition}</span>

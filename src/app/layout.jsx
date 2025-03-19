@@ -25,24 +25,23 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        
         <AuthProvider>
           <FavoritesProvider>
             <NavBar />
             {children}
-            <section className="w-full h-80 bg-white flex justify-center items-center">
-              <div className="w-2/5 h-3/5 flex justify-center items-center rounded shadow-md">
-                <div className="w-2/5 h-5/6 pl-2">
-                  <img className="w-full h-full rounded" src="/bookTable.jpg" alt="" />
+            <section className="w-full h-auto bg-white flex flex-col md:flex-row justify-center items-center py-10 px-4">
+              <div className="w-full md:w-4/5 lg:w-2/3 h-auto flex flex-col md:flex-row justify-center items-center rounded shadow-md">
+                <div className="w-full md:w-2/5 h-auto pl-2 mb-4 md:mb-0">
+                  <img className="w-full h-full rounded" src="/bookTable.jpg" alt="Book Table" />
                 </div>
-                <div className="w-3/5 h-5/6 flex flex-col gap-3 pl-5 py-1">
-                  <h1 className="text-3xl font-bold">Join Our Community</h1>
-                  <p>Sign up & get 10 % of your first books.</p>
-                  <div className="w-full">
-                    <input className="shadow-md w-3/5 p-1.5" type="email" name="" id="" placeholder="your email" />
-                    <button className="p-1.5 bg-green-700 text-white">Subscribe</button>
+                <div className="w-full md:w-3/5 h-auto flex flex-col gap-3 pl-5 py-1">
+                  <h1 className="text-2xl md:text-3xl font-bold">Join Our Community</h1>
+                  <p>Sign up & get 10% off your first books.</p>
+                  <div className="w-full flex flex-col md:flex-row gap-2">
+                    <input className="shadow-md w-full md:w-3/5 p-1.5" type="email" placeholder="your email" />
+                    <button className="p-1.5 bg-green-700 text-white w-full md:w-auto">Subscribe</button>
                   </div>
-                  <div className="flex justify-between w-2/4">
+                  <div className="flex justify-between w-full md:w-2/4 mt-4">
                     <span className="bg-green-700 p-1.5 rounded-full flex justify-center items-center">
                       <FaFacebookF className="text-white" />
                     </span>
@@ -62,37 +61,35 @@ export default function RootLayout({ children }) {
                 </div>
               </div>
             </section>
-            <footer className="w-full h-60 bg-gray-700 flex items-end justify-center">
-              <div className="w-4/5 h-4/5 flex flex-col justify-between items-center">
-                <div className="w-full h-2/4 border-b border-gray-300 flex">
-                  <div className="w-2/4 h-full flex">
-                    <div className="h-3/4 flex items-center">
-                      <IoLayers className="w-3/4 h-3/4 text-green-700" />
-                    </div>
-                    <div className="text-white flex flex-col gap-0.5 pt-2">
-                      <h3>Book Information ?</h3>
-                      <p>Please send us an email at support@gmail.com</p>
-                    </div>
+            <footer className="w-full h-auto bg-gray-700 flex flex-col md:flex-row items-center justify-center py-10 px-4">
+              <div className="w-full md:w-4/5 h-auto flex flex-col md:flex-row justify-between items-center">
+                <div className="w-full md:w-2/4 h-auto border-b md:border-b-0 border-gray-300 flex flex-col md:flex-row items-center mb-4 md:mb-0">
+                  <div className="h-auto flex items-center">
+                    <IoLayers className="w-8 h-8 md:w-12 md:h-12 text-green-700" />
                   </div>
-                  <div className="w-2/4 h-full flex">
-                    <div className="h-3/4 flex items-center">
-                      <FaLifeRing className="w-3/4 h-3/4 text-green-700" />
-                    </div>
-                    <div className="text-white flex flex-col gap-0.5 pt-2">
-                      <h3>Book Information ?</h3>
-                      <p>Please send us an email at support@gmail.com</p>
-                    </div>
+                  <div className="text-white flex flex-col gap-0.5 pt-2">
+                    <h3>Book Information?</h3>
+                    <p>Please send us an email at support@gmail.com</p>
                   </div>
                 </div>
-                <div className="w-full h-2/4 flex items-center justify-between">
-                  <div className="w-2/4 h-3/4 flex items-center">
-                    <h1 className="text-white text-2xl">BookShelf</h1>
+                <div className="w-full md:w-2/4 h-auto flex flex-col md:flex-row items-center">
+                  <div className="h-auto flex items-center">
+                    <FaLifeRing className="w-8 h-8 md:w-12 md:h-12 text-green-700" />
                   </div>
-                  <div className="w-2/4 h-3/4 flex items-center justify-end">
-                    <p className="text-white inline-flex items-center space-x-1">
-                      <FaRegCopyright /> <span>2025 all right reserved made with love by</span> <FaHeart /> <span>Alexandre</span>
-                    </p>
+                  <div className="text-white flex flex-col gap-0.5 pt-2">
+                    <h3>Book Information?</h3>
+                    <p>Please send us an email at support@gmail.com</p>
                   </div>
+                </div>
+              </div>
+              <div className="w-full h-auto flex items-center justify-between mt-4 md:mt-0">
+                <div className="w-2/4 h-auto flex items-center">
+                  <h1 className="text-white text-xl md:text-2xl">BookShelf</h1>
+                </div>
+                <div className="w-2/4 h-auto flex items-center justify-end">
+                  <p className="text-white inline-flex items-center space-x-1">
+                    <FaRegCopyright /> <span>2025 all rights reserved made with love by</span> <FaHeart /> <span>Alexandre</span>
+                  </p>
                 </div>
               </div>
             </footer>
