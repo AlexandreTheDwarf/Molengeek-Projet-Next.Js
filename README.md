@@ -16,7 +16,7 @@ Pour exécuter ce projet localement, suivez ces étapes :
 
 1. **Cloner le dépôt** :
    ```bash
-   git clone https://github.com/votre-utilisateur/bookshelf.git
+   git clone https://github.com/AlexandreTheDwarf/Molengeek-Projet-Next.Js.git
    cd bookshelf
    ```
 
@@ -40,4 +40,3 @@ Pour exécuter ce projet localement, suivez ces étapes :
 - **Context API** : Gestion de l'état global pour les favoris et l'authentification.
 - **React Icons** : Bibliothèque d'icônes pour une interface utilisateur améliorée.
 
-```
